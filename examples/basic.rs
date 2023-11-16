@@ -4,17 +4,10 @@ use tracing::info;
 use web_clap::WebParser;
 
 #[derive(Parser, Debug, Clone, Deserialize)]
-#[serde(default)]
+#[serde(default = "WebParser::from_no_args")]
 pub struct Args {
     #[clap(short, long, default_value = "Alice")]
     pub name: String,
-}
-
-/// We need to implement Default for serde defaults to work properly
-impl Default for Args {
-    fn default() -> Self {
-        Self::from_no_args()
-    }
 }
 
 fn main() {

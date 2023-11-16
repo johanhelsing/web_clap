@@ -8,21 +8,10 @@ Just derive `serde::Serialize` for your clap struct:
 
 ```rust
 #[derive(Parser, Debug, Clone, Deserialize)]
-#[serde(default)]
+#[serde(default = "WebParser::from_no_args")]
 pub struct Args {
     #[clap(short, long, default_value = "Alice")]
     pub name: String,
-}
-```
-
-...and implement `Default` using:
-
-```rust
-/// We need to implement Default for serde defaults to work properly
-impl Default for Args {
-    fn default() -> Self {
-        Self::from_no_args()
-    }
 }
 ```
 
